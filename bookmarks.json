@@ -167,98 +167,96 @@
   {
     "nome": "BBC - Artigo 6",
     "url": "https://www.bbc.com/portuguese/articles/cd1d9qj9288o",
-"genero": "notícias"
-},
-{
-"nome": "BBC - Artigo 7",
-"url": "[https://www.bbc.com/portuguese/articles/c51dxvv1jgzo](https://www.bbc.com/portuguese/articles/c51dxvv1jgzo)",
-"genero": "notícias"
-},
-{
-"nome": "BBC - Artigo 8",
-"url": "[https://www.bbc.com/portuguese/geral-61200387](https://www.bbc.com/portuguese/geral-61200387)",
-"genero": "notícias"
-},
-{
-"nome": "Cursos Mais IFMG",
-"url": "[https://mais.ifmg.edu.br/maisifmg/](https://mais.ifmg.edu.br/maisifmg/)",
-"genero": "educação"
-},
-{
-"nome": "Escola do Trabalhador 40",
-"url": "[https://ead.escoladotrabalhador40.com.br/](https://ead.escoladotrabalhador40.com.br/)",
-"genero": "educação"
-},
-{
-"nome": "Portal Mundi IFSul (Duplicado)",
-"url": "[https://mundi.ifsul.edu.br/portal/index.php](https://mundi.ifsul.edu.br/portal/index.php)",
-"genero": "educação"
-},
-{
-"nome": "Especialização em Tutoria em Educação a Distância - UAB (Duplicado)",
-"url": "[https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/](https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/)",
-"genero": "educação"
-},
-{
-"nome": "Pós-Graduação UFMS",
-"url": "[https://posgraduacao.ufms.br/portal/cursos/view/352](https://posgraduacao.ufms.br/portal/cursos/view/352)",
-"genero": "educação"
-},
-{
-"nome": "Especialização em Tutoria em Educação a Distância - UAB (Duplicado)",
-"url": "[https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/](https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/)",
-"genero": "educação"
-},
-{
-"nome": "Vídeo no YouTube",
-"url": "https://www.youtube.com/watch?v=mr39iuYo\_vA",
-"genero": "social"
-},
-{
-"nome": "SlidePlayer",
-"url": "[https://slideplayer.com.br/slide/51708/](https://slideplayer.com.br/slide/51708/)",
-"genero": "educação"
-},
-{
-"nome": "Empreendedorismo - SlideServe",
-"url": "https://www.slideserve.com/lam/empreendedorismo?utm\_source=slideserve\&utm\_medium=website\&utm\_campaign=auto+related+load",
-"genero": "negócios"
-},
-{
-"nome": "Empreendedorismo - SlideServe (Duplicado)",
-"url": "[https://www.slideserve.com/cameo/empreendedorismo](https://www.slideserve.com/cameo/empreendedorismo)",
-"genero": "negócios"
-},
-{
-"nome": "Teorias de Taylor - Artigo 1",
-"url": "[https://revistas.pucsp.br/ls/article/viewFile/26678/pdf](https://revistas.pucsp.br/ls/article/viewFile/26678/pdf)",
-"genero": "gestão"
-},
-{
-"nome": "Teorias de Taylor - Artigo 2",
-"url": "[https://administradores.com.br/artigos/a-importancia-de-taylor-para-a-administracao](https://administradores.com.br/artigos/a-importancia-de-taylor-para-a-administracao)",
-"genero": "gestão"
-},
-{
-"nome": "Teorias de Ford - Artigo 1",
-"url": "[http://www.scielo.br/pdf/rap/v45n4/a11v45n4.pdf](http://www.scielo.br/pdf/rap/v45n4/a11v45n4.pdf)",
-"genero": "gestão"
-},
-{
-"nome": "Teorias de Ford - Artigo 2",
-"url": "[https://administradores.com.br/artigos/a-contribuicao-de-henry-ford-para-a-administracao-moderna](https://administradores.com.br/artigos/a-contribuicao-de-henry-ford-para-a-administracao-moderna)",
-"genero": "gestão"
-},
-{
-"nome": "Teorias de Fayol - Artigo 1",
-"url": "[http://www.scielo.br/pdf/ram/v12n1/a08v12n1.pdf](http://www.scielo.br/pdf/ram/v12n1/a08v12n1.pdf)",
-"genero": "gestão"
-},
-{
-"nome": "Teorias de Fayol - Artigo 2",
-"url": "[https://administradores.com.br/artigos/14-principios-de-gestao-de-fayol](https://administradores.com.br/artigos/14-principios-de-gestao-de-fayol)",
-"genero": "gestão"
-}
+    "genero": "notícias"
+  },
+  {
+    "nome": "BBC - Artigo 7",
+    "url": "[https://www.bbc.com/portuguese/articles/c51dxvv1jgzo](https://www.bbc.com/portuguese/articles/c51dxvv1jgzo)",
+    "genero": "notícias"
+  },
+  {
+    "nome": "BBC - Artigo 8",
+    "url": "[https://www.bbc.com/portuguese/geral-61200387](https://www.bbc.com/portuguese/geral-61200387)",
+    "genero": "notícias"
+  },
+  {
+    "nome": "Cursos Mais IFMG",
+    "url": "[https://mais.ifmg.edu.br/maisifmg/](https://mais.ifmg.edu.br/maisifmg/)",
+    "genero": "educação"
+  },
+  {
+    "nome": "Escola do Trabalhador 40",
+    "url": "[https://ead.escoladotrabalhador40.com.br/](https://ead.escoladotrabalhador40.com.br/)",
+    "genero": "educação"
+  },
+  {
+    "nome": "Portal Mundi IFSul (Duplicado)",
+    "url": "[https://mundi.ifsul.edu.br/portal/index.php](https://mundi.ifsul.edu.br/portal/index.php)",
+    "genero": "educação"
+  },
+  {
+    "nome": "Especialização em Tutoria em Educação a Distância - UAB (Duplicado)",
+    "url": "[https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/](https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/)",
+    "genero": "educação"
+  },
+  {
+    "nome": "Pós-Graduação UFMS",
+    "url": "[https://posgraduacao.ufms.br/portal/cursos/view/352](https://posgraduacao.ufms.br/portal/cursos/view/352)",
+    "genero": "educação"
+  },
+  {
+    "nome": "Especialização em Tutoria em Educação a Distância - UAB (Duplicado)",
+    "url": "[https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/](https://agead.ufms.br/especializacao-em-tutoria-em-educacao-a-distancia-uab/)",
+    "genero": "educação"
+  },
+  {
+    "nome": "Vídeo no YouTube",
+    "url": "https://www.youtube.com/watch?v=mr39iuYo_vA",
+    "genero": "social"
+  },
+  {
+    "nome": "SlidePlayer",
+    "url": "[https://slideplayer.com.br/slide/51708/](https://slideplayer.com.br/slide/51708/)",
+    "genero": "educação"
+  },
+  {
+    "nome": "Empreendedorismo - SlideServe",
+    "url": "https://www.slideserve.com/lam/empreendedorismo?",
+    "genero": "negócios"
+  },
+  {
+    "nome": "Empreendedorismo - SlideServe (Duplicado)",
+    "url": "[https://www.slideserve.com/cameo/empreendedorismo](https://www.slideserve.com/cameo/empreendedorismo)",
+    "genero": "negócios"
+  },
+  {
+    "nome": "Teorias de Taylor - Artigo 1",
+    "url": "[https://revistas.pucsp.br/ls/article/viewFile/26678/pdf](https://revistas.pucsp.br/ls/article/viewFile/26678/pdf)",
+    "genero": "gestão"
+  },
+  {
+    "nome": "Teorias de Taylor - Artigo 2",
+    "url": "[https://administradores.com.br/artigos/a-importancia-de-taylor-para-a-administracao](https://administradores.com.br/artigos/a-importancia-de-taylor-para-a-administracao)",
+    "genero": "gestão"
+  },
+  {
+    "nome": "Teorias de Ford - Artigo 1",
+    "url": "[http://www.scielo.br/pdf/rap/v45n4/a11v45n4.pdf](http://www.scielo.br/pdf/rap/v45n4/a11v45n4.pdf)",
+    "genero": "gestão"
+  },
+  {
+    "nome": "Teorias de Ford - Artigo 2",
+    "url": "[https://administradores.com.br/artigos/a-contribuicao-de-henry-ford-para-a-administracao-moderna](https://administradores.com.br/artigos/a-contribuicao-de-henry-ford-para-a-administracao-moderna)",
+    "genero": "gestão"
+  },
+  {
+    "nome": "Teorias de Fayol - Artigo 1",
+    "url": "[http://www.scielo.br/pdf/ram/v12n1/a08v12n1.pdf](http://www.scielo.br/pdf/ram/v12n1/a08v12n1.pdf)",
+    "genero": "gestão"
+  },
+  {
+    "nome": "Teorias de Fayol - Artigo 2",
+    "url": "[https://administradores.com.br/artigos/14-principios-de-gestao-de-fayol](https://administradores.com.br/artigos/14-principios-de-gestao-de-fayol)",
+    "genero": "gestão"
+  }
 ]
-
-
