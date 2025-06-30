@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Componente Dinâmico</title>
+</head>
+<body>
+  <script>
+    function componenteTela(dado) {
+        const div = document.createElement('div');
+
+        const link = document.createElement('a');
+        link.href = dado.url;
+        link.textContent = dado.nome;
+        link.target = '_blank';
+
+        const span = document.createElement('span');
+        span.textContent = ` (${dado.genero})`;
+
+        div.appendChild(link);
+        div.appendChild(span);
+
+        return div;
+    }
+
+    const dado = {
+        nome: 'Teorias de Fayol - Artigo 2',
+        url: 'https://administradores.com.br/artigos/14-principios-de-gestao-de-fayol',
+        genero: 'gestão'
+    };
+
+    // Adiciona o componente na tela corretamente
+    document.body.appendChild(componenteTela(dado));
+  </script>
+</body>
+</html>
