@@ -212,3 +212,128 @@ Para uma aplicação simples de visualização de links de favoritos, o uso de u
 
 Se você precisar de mais alguma ajuda ou quiser expandir a ideia, é só avisar!
 
+Para adicionar um "loading" na tela enquanto a requisição está sendo processada, você pode fazer isso manipulando o DOM e exibindo um elemento de carregamento (como um spinner ou uma mensagem de "Carregando...") até que os dados sejam carregados.
+
+Aqui está um exemplo de como você pode fazer isso:
+
+### Passos:
+
+1. Exiba um "loading" enquanto a requisição está em andamento.
+2. Quando a requisição for concluída (ou com erro), remova o "loading" e exiba os dados ou a mensagem de erro.
+
+### Código Atualizado:
+
+```javascript
+function getDadosMarcadores() {
+  // Exibe o loading
+  const loadingElement = document.createElement('div');
+  loadingElement.innerHTML = "Carregando...";
+  loadingElement.id = "loading";
+  document.body.appendChild(loadingElement);  // Adiciona o loading à página
+
+  fetch('https://raw.githubusercontent.com/talilotarlison/desenvolvimento-web-udemy/refs/heads/main/bookmarks.json')
+    .then(response => response.json())  // Converte o conteúdo para JSON
+    .then(data => {
+      console.log(data);  // Manipule os dados aqui
+      listarDadosNaTela(data);  // Exibe os dados na tela
+      // Remove o loading
+      document.getElementById('loading').remove();
+    })
+    .catch(error => {
+      console.error('Erro ao carregar o arquivo JSON:', error);
+      // Em caso de erro, remove o loading e exibe uma mensagem de erro
+      document.getElementById('loading').remove();
+      alert("Erro ao carregar os dados!");
+    });
+}
+```
+
+### Explicação:
+
+1. **Elemento de Carregamento:** Antes de fazer a requisição, criamos um elemento de carregamento (`div` com a mensagem "Carregando..."). Esse elemento é adicionado ao corpo da página (`document.body.appendChild(loadingElement)`).
+
+2. **Remover o Carregamento:** Quando a requisição for bem-sucedida, o elemento de carregamento é removido da tela com `document.getElementById('loading').remove()`.
+
+3. **Tratamento de Erro:** Se ocorrer um erro, o elemento de carregamento também é removido, e uma mensagem de erro é exibida.
+
+Você pode customizar o estilo do "loading" (por exemplo, um spinner ou uma imagem de carregamento) usando CSS para deixá-lo mais interativo.
+
+Exemplo de estilo básico para o loading:
+
+```css
+#loading {
+  font-size: 20px;
+  color: #ff6347;
+  text-align: center;
+  margin-top: 20px;
+}
+```
+
+Isso criará uma experiência de usuário mais fluida enquanto os dados são carregados!
+
+
+Para garantir que o "loading" seja exibido **apenas enquanto a requisição está sendo feita** e não antes ou depois, você precisa seguir uma abordagem onde o loading é ativado **no início da requisição** e removido **somente depois que a requisição for concluída**, seja com sucesso ou erro.
+
+### Passos:
+
+1. **Exibir o "loading" quando a requisição começar.**
+2. **Remover o "loading" somente após a resposta (seja sucesso ou falha).**
+
+Aqui está o código atualizado:
+
+### Código:
+
+```javascript
+function getDadosMarcadores() {
+  // Cria e exibe o elemento de carregamento
+  const loadingElement = document.createElement('div');
+  loadingElement.innerHTML = "Carregando...";
+  loadingElement.id = "loading";
+  document.body.appendChild(loadingElement); // Exibe o carregando na tela
+
+  fetch('https://raw.githubusercontent.com/talilotarlison/desenvolvimento-web-udemy/refs/heads/main/bookmarks.json')
+    .then(response => response.json())  // Converte o conteúdo para JSON
+    .then(data => {
+      console.log(data);  // Manipula os dados recebidos
+      listarDadosNaTela(data);  // Exibe os dados na tela
+    })
+    .catch(error => {
+      console.error('Erro ao carregar o arquivo JSON:', error);
+      alert("Erro ao carregar os dados!");  // Exibe erro, se necessário
+    })
+    .finally(() => {
+      // Remove o carregamento após a requisição ser concluída (sucesso ou erro)
+      document.getElementById('loading').remove();
+    });
+}
+```
+
+### Explicação:
+
+* **Exibição do Loading:** O elemento `loadingElement` é criado e inserido na tela antes da requisição (`document.body.appendChild(loadingElement)`).
+* **Remoção do Loading:** Utilizamos o método `.finally()` para garantir que o loading seja removido **independente de o processo ter sido bem-sucedido ou ter falhado**. O `.finally()` será chamado após o `.then()` ou `.catch()`, garantindo que o carregamento só seja removido após o término da requisição.
+
+### Alternativa com CSS:
+
+Para melhorar a experiência visual, você pode estilizar o "loading" com CSS para garantir que ele fique em uma posição fixa enquanto a requisição estiver sendo feita. Por exemplo:
+
+```css
+#loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #ff6347;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+```
+
+### Resultados Esperados:
+
+* **Antes da requisição:** O carregamento é exibido centralizado na tela.
+* **Durante a requisição:** O "loading" continua visível até que a resposta seja recebida.
+* **Depois da requisição:** O "loading" é removido, e os dados (ou erro) são mostrados.
