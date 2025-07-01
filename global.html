@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobeMark - Gerenciador de Marcadores</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --text: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #adb5bd;
+            --white: #ffffff;
+            --success: #4cc9f0;
+            --error: #f72585;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -10%;
+            width: 120%;
+            height: 100px;
+            background: var(--white);
+            transform: rotate(3deg);
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title i {
+            margin-right: 10px;
+            color: var(--success);
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 500;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            margin: 2rem auto;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        #list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .bookmark-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--primary);
+        }
+
+        .bookmark-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .bookmark-globe {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--primary);
+            opacity: 0.2;
+            font-size: 2rem;
+            z-index: 1;
+        }
+
+        .bookmark-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bookmark-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .bookmark-link:hover {
+            color: var(--primary);
+        }
+
+        .bookmark-link i {
+            margin-right: 8px;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .bookmark-category {
+            display: inline-block;
+            font-size: 0.8rem;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .error-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(247, 37, 133, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            color: var(--error);
+            margin-bottom: 1rem;
+        }
+
+        .error-text {
+            font-size: 1.2rem;
+            color: var(--text);
+            font-weight: 500;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .try-again-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: var(--error);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            background: var(--white);
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            #list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="title"><i class="fas fa-globe-americas"></i>GlobeMark</h1>
+    </header>
+
+    <div class="container">
+        <button class="btn" id="loadBtn"><i class="fas fa-sync-alt"></i>Carregar Marcadores</button>
+        <div id="list"></div>
+    </div>
+
+    <footer>
+        &copy; 2023 GlobeMark - Todos os direitos reservados
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('loadBtn');
+            
+            btn.addEventListener('click', function(e) {
+                getDadosMarcadores();
+            });
+
+            function createBookmarkCard(dado, index) {
+                // Criar o elemento div principal
+                const card = document.createElement('div');
+                card.className = 'bookmark-card';
+                
+                // Adicionar o ícone de globo de fundo
+                const globeBg = document.createElement('div');
+                globeBg.className = 'bookmark-globe';
+                globeBg.innerHTML = '<i class="fas fa-globe-americas"></i>';
+                
+                // Criar o conteúdo do card
+                const content = document.createElement('div');
+                content.className = 'bookmark-content';
+                
+                // Criar o link
+                const link = document.createElement('a');
+                link.className = 'bookmark-link';
+                link.href = dado.url;
+                link.target = '_blank';
+                link.innerHTML = `<i class="fas fa-external-link-alt"></i> ${index + 1}. ${dado.nome}`;
+                
+                // Criar a categoria
+                const category = document.createElement('span');
+                category.className = 'bookmark-category';
+                category.textContent = dado.genero;
+                
+                // Montar a estrutura
+                content.appendChild(link);
+                content.appendChild(document.createElement('br'));
+                content.appendChild(category);
+                
+                card.appendChild(globeBg);
+                card.appendChild(content);
+                
+                return card;
+            }
+
+            function listarDadosNaTela(dados) {
+                const marcadores = document.getElementById('list');
+                marcadores.innerHTML = ''; // Limpa a lista antes de adicionar novos itens
+                
+                dados.forEach((marcador, index) => {
+                    marcadores.appendChild(createBookmarkCard(marcador, index));
+                });
+            }
+
+            function showLoading() {
+                const loading = document.createElement('div');
+                loading.className = 'loading-container';
+                loading.id = 'loading';
+                loading.innerHTML = `
+                    <div class="spinner"></div>
+                    <div class="loading-text">Carregando seus marcadores...</div>
+                `;
+                document.body.appendChild(loading);
+            }
+
+            function showError() {
+                const error = document.createElement('div');
+                error.className = 'error-container';
+                error.id = 'error';
+                error.innerHTML = `
+                    <div class="error-icon"><i class="fas fa-exclamation-circle"></i></div>
+                    <div class="error-text">Ocorreu um erro ao carregar os marcadores.</div>
+                    <button class="btn try-again-btn" onclick="location.reload()"><i class="fas fa-redo"></i> Tentar novamente</button>
+                `;
+                document.body.appendChild(error);
+            }
+
+            function getDadosMarcadores() {
+                showLoading();
+                
+                fetch('https://raw.githubusercontent.com/talilotarlison/desenvolvimento-web-udemy/refs/heads/main/bookmarks.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        listarDadosNaTela(data);
+                    })
+                    .catch(error => {
+                        console.error('Erro ao carregar o arquivo JSON:', error);
+                        showError();
+                    })
+                    .finally(() => {
+                        const loadingElement = document.getElementById('loading');
+                        if (loadingElement) {
+                            setTimeout(() => {
+                                loadingElement.remove();
+                            }, 500);
+                        }
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
