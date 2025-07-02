@@ -4,6 +4,8 @@
 **Transformação Digital**  
 **Cisco NetAcad LATAM 2024**
 
+- [Cursos Senai e Cisco](https://heyzine.com/flip-book/838f2d58a7.html#page/3)
+
 - [Evento: Transformação Digital - SENAI Caminhos para o Futuro](https://www.agendatipara.com.br/eventos/transformacao-digital-senai-caminhos-para-o-futuro)
 
 - [Vídeo: Transformação Digital](https://www.youtube.com/watch?v=5lKnzvKiQ7M)
