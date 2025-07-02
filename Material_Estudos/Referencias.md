@@ -7,6 +7,6 @@
 5. [LNCC - Testar PHP](https://www.lncc.br/~borges/php/testar.html)
 6. [Mundi - Cursos de Qualificação Profissional (IFSul)](https://mundi.ifsul.edu.br/cursos/cursos-de-qualificacao-profissional/)
 7. [Portal MCH - Editais FIC em Andamento](https://portal.mch.ifsuldeminas.edu.br/cursos-de-extensao/editais-fic-em-andamento)
-8. [Cursos](https://heyzine.com/flip-book/838f2d58a7.html#page/3)
+8. [Cursos Senai e Cisco](https://heyzine.com/flip-book/838f2d58a7.html#page/3)
 9. [Lovable](https://lovable.dev/)
 10. [CIEE e Google Cursos](https://portal.ciee.org.br/quero-me-preparar/google-tech/#inteligencia)
