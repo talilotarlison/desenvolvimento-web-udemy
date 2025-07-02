@@ -10,3 +10,5 @@
 8. [Cursos Senai e Cisco](https://heyzine.com/flip-book/838f2d58a7.html#page/3)
 9. [Lovable](https://lovable.dev/)
 10. [CIEE e Google Cursos](https://portal.ciee.org.br/quero-me-preparar/google-tech/#inteligencia)
+11. [Cursor](https://cursor.com/)
+12. [Cline](https://cline.bot/)
