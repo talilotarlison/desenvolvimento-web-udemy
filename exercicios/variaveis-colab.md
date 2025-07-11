@@ -366,4 +366,84 @@ Esses modelos foram treinados com textos em português e outras línguas, e têm
 Embora o **GPT-2** consiga gerar texto em português, se você deseja uma **maior fluidez** e **precisão** nas respostas em português, pode ser mais interessante usar um modelo **ajustado ou treinado especificamente para o português**, como o `neuralmind/gpt2-portuguese`, ou usar um modelo **multilíngue** da Hugging Face.
 
 Se precisar de mais alguma coisa, posso te ajudar a ajustar os parâmetros ou até escolher o modelo certo para o seu caso!
+O comportamento que você está observando no **GPT-2**, com respostas aleatórias, pode ser causado por algumas razões:
+
+1. **Parâmetros de Geração Não Otimizados**: O modelo pode estar gerando respostas desconexas devido a parâmetros como **`temperature`**, **`top_k`**, ou **`top_p`** não estarem configurados corretamente. Se a **temperatura** estiver muito alta, o modelo pode gerar respostas mais aleatórias.
+
+2. **Comprimento de Resposta**: Se o comprimento da resposta gerada for muito longo, o modelo pode começar a se desviar do contexto original e gerar mais texto aleatório.
+
+3. **Ambiguidades no Prompt**: Mesmo com um prompt simples, o GPT-2 pode ser impreciso ou incoerente se os parâmetros de geração não forem ajustados corretamente.
+
+### **Ajustando os Parâmetros para Melhorar a Coerência**
+
+Você pode tentar ajustar os parâmetros de geração para ajudar o modelo a ser mais focado e coerente.
+
+Aqui estão algumas sugestões para melhorar a qualidade da resposta:
+
+* **`temperature=0.7`**: Isso controla a aleatoriedade das respostas. Valores mais baixos (como 0.7) tendem a gerar respostas mais coesas e precisas.
+* **`top_k=50`**: Limita o número de tokens possíveis para a geração de texto, o que ajuda a reduzir a aleatoriedade.
+* **`top_p=0.9`**: Usa o **nucleus sampling**, que seleciona o próximo token com base nos tokens mais prováveis, o que melhora a coerência.
+
+Além disso, para controlar melhor o comprimento da resposta, você pode ajustar o parâmetro **`max_length`** ou usar **`max_new_tokens`** para especificar exatamente quantos tokens o modelo deve gerar.
+
+### **Exemplo de Código Ajustado**:
+
+```python
+from transformers import pipeline
+
+# Carregar o pipeline de geração de texto com GPT-2
+generator = pipeline("text-generation", model="gpt2", device=0)  # Usando CUDA
+
+# Definir o prompt (pergunta)
+prompt = "Quem descobriu o Brasil?"
+
+# Gerar a resposta com ajustes de parâmetros
+output = generator(
+    prompt,
+    max_length=100,  # Limitar o comprimento da resposta
+    temperature=0.7,  # Controla a aleatoriedade
+    top_k=50,         # Limitar a seleção de tokens para maior controle
+    top_p=0.9,        # Nucleus sampling
+    truncation=True   # Garantir que o texto não ultrapasse o limite de tokens
+)
+
+# Exibir a resposta gerada
+print(output[0]['generated_text'])
+```
+
+### **Resultados Esperados:**
+
+Com esses ajustes, o GPT-2 deve gerar uma resposta mais centrada e coesa. Para a pergunta "Quem descobriu o Brasil?", a resposta deve ser algo como:
+
+**"O Brasil foi descoberto em 1500 por Pedro Álvares Cabral, um navegador português que chegou à costa brasileira durante uma expedição ao Novo Mundo."**
+
+### **Alternativa - Usar Modelos Melhor Treinados para Tarefas Específicas:**
+
+Se o **GPT-2** não estiver gerando boas respostas para o tipo de tarefa que você está buscando, você pode tentar usar um modelo mais focado ou treinado em português, como o **`neuralmind/gpt2-portuguese`**, que pode gerar respostas mais naturais em português.
+
+Aqui está um exemplo de como usá-lo:
+
+```python
+from transformers import pipeline
+
+# Usar o modelo específico para português
+generator = pipeline("text-generation", model="neuralmind/gpt2-portuguese", device=0)
+
+# Definir o prompt (pergunta)
+prompt = "Quem descobriu o Brasil?"
+
+# Gerar a resposta
+output = generator(prompt, max_length=100, temperature=0.7)
+
+# Exibir a resposta gerada
+print(output[0]['generated_text'])
+```
+
+Esse modelo foi treinado para gerar respostas mais precisas e coerentes em português.
+
+### **Conclusão:**
+
+Se o GPT-2 ainda estiver gerando respostas aleatórias, ajustar os parâmetros de **geração** e **limitar o comprimento da resposta** pode ajudar. Se mesmo assim o modelo não estiver respondendo como esperado, usar um modelo específico para português pode ser uma alternativa eficaz.
+
+Caso o modelo ainda não produza resultados satisfatórios, me avise para explorarmos outras opções ou ajustes.
 
