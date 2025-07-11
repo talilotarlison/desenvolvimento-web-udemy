@@ -558,4 +558,75 @@ A resposta está repetindo o fato de que **Pedro Álvares Cabral** foi o respons
 2. **Ajustar os parâmetros de controle de diversidade** (como **top\_k** e **top\_p**) para obter respostas mais diretas.
 3. Se você tiver acesso, tentar **GPT-3** ou **GPT-4** seria uma boa opção para melhorar ainda mais a qualidade da resposta.
 
+Para evitar que o prompt enviado apareça na resposta gerada, você pode **limitar a geração do texto** para que o modelo só retorne a resposta relevante e não o prompt que foi enviado. Uma forma simples de fazer isso é remover o **prompt** da saída gerada, extraindo apenas a parte relevante da resposta.
+
+### Como ajustar:
+
+1. **Usar a função `generated_text` corretamente:**
+   Em vez de apenas exibir o conteúdo completo de `output[0]['generated_text']`, você pode buscar pela **resposta gerada após o prompt**. Isso pode ser feito com o **corte do texto gerado**.
+
+2. **Garantir que o modelo não replique o prompt**:
+   Quando você usa o modelo para gerar respostas, ele pode repetir a parte inicial do texto (o prompt). Para resolver isso, você pode cortar a parte do prompt da resposta final.
+
+### Código Ajustado:
+
+Aqui está uma solução para **remover o prompt** da resposta gerada:
+
+```python
+from transformers import pipeline
+
+# Carregar o pipeline de geração de texto com GPT-2
+generator = pipeline("text-generation", model="openai-community/gpt2", device=0)  # Usando CUDA
+
+# Definir o texto base com informações históricas
+base_text = """
+In 1500, the Portuguese navigator Pedro Álvares Cabral is widely credited with discovering Brazil. 
+He was sent by the Portuguese King Manuel I to establish a sea route to India. 
+On April 22, 1500, Cabral and his fleet of ships landed on the coast of what is now Brazil. 
+This event marked the beginning of Portuguese colonization in South America.
+"""
+
+# Definir o prompt com a pergunta, seguido pelo texto base
+prompt = base_text + "\n\nWho was responsible for the discovery of Brazil by Europeans in 1500?"
+
+# Gerar a resposta com ajustes de parâmetros
+output = generator(
+    prompt,
+    max_new_tokens=60,       # Limitar o número de tokens gerados
+    temperature=0.3,         # Reduzir a aleatoriedade para respostas mais precisas
+    top_k=50,                # Limitar a diversidade para maior controle
+    top_p=0.85,              # Manter um controle de aleatoriedade
+    truncation=True          # Garantir que o texto não ultrapasse o limite de tokens
+)
+
+# Exibir apenas a parte relevante da resposta, sem o prompt
+generated_text = output[0]['generated_text']
+
+# Remover o prompt da resposta gerada
+response = generated_text[len(prompt):].strip()
+
+print("GPT-2 Response:")
+print(response)
+```
+
+### Explicação:
+
+* **`output[0]['generated_text']`** contém o texto completo, incluindo o **prompt**.
+* **`len(prompt)`** calcula o número de caracteres do prompt, e **`generated_text[len(prompt):]`** remove essa parte da resposta gerada.
+* O método **`.strip()`** remove quaisquer espaços ou quebras de linha extras no início ou final da resposta.
+
+### Resultado Esperado:
+
+Com isso, você verá apenas a **resposta gerada**, sem a parte repetitiva do prompt:
+
+```plaintext
+GPT-2 Response:
+The Portuguese explorer Pedro Álvares Cabral was the one who discovered Brazil in 1500. He was sent by King Manuel I of Portugal to establish a sea route to India, and upon his arrival on the Brazilian coast, he claimed the land for Portugal.
+```
+
+Agora o modelo deve gerar apenas a resposta diretamente relacionada à pergunta, sem incluir o texto base do prompt.
+
+Se precisar de mais ajustes ou explicações, é só avisar!
+
+
 Se precisar de mais ajuda ou ajustes, me avise!
