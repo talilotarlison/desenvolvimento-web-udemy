@@ -345,3 +345,7 @@ print(result[0]['generated_text'])
 * **Chave de API**: Certifique-se de nunca compartilhar sua chave de API publicamente, pois ela dá acesso à sua conta e ao uso dos recursos da plataforma.
 
 Com isso, você pode começar a usar a API do Hugging Face gratuitamente, basta seguir esses passos para obter e usar a chave de API. Se precisar de mais ajuda para configurar ou entender o código, estou à disposição!
+
+- https://hub.asimov.academy/tutorial/acessando-modelos-de-inteligencia-artificial-com-a-hugging-face-inference-api/
+- https://huggingface.co/openai-community/gpt2
+- https://colab.research.google.com/#scrollTo=wefvjlct9yH-&fileId=https%3A//huggingface.co/openai-community/gpt2.ipynb
