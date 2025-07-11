@@ -274,3 +274,95 @@ output = generator(
 generated_text = output[0]['generated_text']
 print(generated_text)
 ```
+Claro! Para transformar o código que você forneceu em um **Jupyter Notebook**, basta criar uma célula para cada parte do código. Aqui está a versão adaptada para um Jupyter Notebook:
+
+---
+
+### **1. Instalar as Dependências**
+
+Primeira célula: instala as bibliotecas necessárias.
+
+```python
+!pip install transformers[torch] torchvision accelerate
+```
+
+---
+
+### **2. Fazer Login (Se necessário)**
+
+Se você precisar de autenticação via Hugging Face, descomente e use a célula abaixo.
+
+```python
+from huggingface_hub import login
+
+# Faça login com seu token de acesso
+login(token="SEU_TOKEN_AQUI")
+```
+
+---
+
+### **3. Carregar o Modelo e Tokenizer**
+
+Carregue o modelo e tokenizer do Hugging Face com seu token de autenticação.
+
+```python
+from transformers import AutoModel, AutoTokenizer
+
+# Fornecendo o token diretamente para download
+model = AutoModel.from_pretrained(
+    "unsloth/gemma-3-1b-it", 
+    use_auth_token="SEU_TOKEN_AQUI"
+)
+
+tokenizer = AutoTokenizer.from_pretrained(
+    "unsloth/gemma-3-1b-it",
+    use_auth_token="SEU_TOKEN_AQUI",
+    force_download=True
+)
+```
+
+---
+
+### **4. Carregar o Pipeline de Geração de Texto**
+
+Aqui, carregamos o modelo para geração de texto.
+
+```python
+from transformers import pipeline
+
+# Carregar o pipeline de geração de texto com o modelo especificado
+generator = pipeline(task="text-generation", model="unsloth/gemma-3-1b-it", device=0)  # Usando CUDA
+```
+
+---
+
+### **5. Definir o Prompt e Gerar Texto**
+
+Defina o prompt e ajuste os parâmetros para gerar o texto.
+
+```python
+# Definir o prompt mais específico
+prompt = "Quem descobriu a america?"
+
+# Gerar a resposta com ajustes de parâmetros
+output = generator(
+    prompt,
+    max_length=300,     # Limitar o comprimento da resposta para dar mais contexto
+    temperature=0.3,    # Menor temperatura para garantir mais coerência
+    top_k=40,           # Ajuste para um espaço de amostra mais restrito
+    top_p=0.85,         # Nucleus sampling com maior controle
+    truncation=True     # Garantir que o texto não ultrapasse o limite de tokens
+)
+
+# Exibir a resposta gerada
+generated_text = output[0]['generated_text']
+print(generated_text)
+```
+
+---
+
+### **Resumo**
+
+Agora, basta rodar as células do notebook, uma por uma, e você deve conseguir gerar texto usando o modelo `unsloth/gemma-3-1b-it` de forma interativa. Não se esqueça de substituir `"SEU_TOKEN_AQUI"` pelo seu token de autenticação válido do Hugging Face.
+
+Se você precisar de mais alguma coisa, é só avisar!
