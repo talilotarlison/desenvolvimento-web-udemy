@@ -630,3 +630,88 @@ Se precisar de mais ajustes ou explicações, é só avisar!
 
 
 Se precisar de mais ajuda ou ajustes, me avise!
+A resposta gerada ainda contém informações imprecisas e repetitivas. A menção a **Juan de Guzman** não é historicamente correta — **Cristóvão Colombo** é o explorador mais amplamente creditado com a "descoberta" das Américas, em 1492. Isso ocorre porque o **GPT-2** pode gerar informações erradas ou misturar detalhes históricos, especialmente quando a temperatura é mais baixa e ele tenta ser mais conservador na escolha das palavras.
+
+### Possíveis Melhorias:
+
+1. **Prompt Mais Claro e Direto**:
+   Em vez de apenas perguntar "Who was responsible for the discovery of the Americas in 1492?", tente refinar o prompt para incluir a resposta já esperada, fornecendo mais contexto para ajudar o modelo.
+
+2. **Usar Modelos Mais Avançados ou Específicos**:
+   Para obter respostas mais precisas e baseadas em fatos históricos, considere usar **GPT-3** ou **GPT-4**, que são mais avançados, ou modelos treinados especificamente para texto histórico ou multilíngue.
+
+3. **Refinar o Texto Base**:
+   Ajustar o texto base para tornar as informações mais claras e focadas em Colombo pode ajudar a direcionar a resposta gerada.
+
+### Novo Caso de Teste com Ajustes:
+
+Vamos melhorar o **prompt** e o **texto base** para tentar evitar a confusão com "Juan de Guzman" e garantir que o modelo se concentre em **Cristóvão Colombo**.
+
+#### Novo Texto Base:
+
+```text
+In 1492, the Italian navigator Christopher Columbus, sponsored by the Spanish monarchs Ferdinand and Isabella, set sail across the Atlantic Ocean in search of a westward route to Asia. On October 12, 1492, Columbus and his crew reached an island in the Caribbean, which he named San Salvador, marking the beginning of European exploration and colonization in the Americas. This event is often referred to as the "discovery" of the Americas, although indigenous peoples had lived there for thousands of years.
+```
+
+#### Novo Prompt Refinado:
+
+```python
+# Definir o texto base com informações históricas sobre Cristóvão Colombo
+base_text = """
+In 1492, the Italian navigator Christopher Columbus, sponsored by the Spanish monarchs Ferdinand and Isabella, set sail across the Atlantic Ocean in search of a westward route to Asia. 
+On October 12, 1492, Columbus and his crew reached an island in the Caribbean, which he named San Salvador, marking the beginning of European exploration and colonization in the Americas.
+This event is often referred to as the "discovery" of the Americas, although indigenous peoples had lived there for thousands of years.
+"""
+
+# Definir o prompt com a pergunta mais específica e clara
+prompt = base_text + "\n\nWho was the explorer responsible for the discovery of the Americas in 1492? Mentioning his nationality and the sponsoring monarchs."
+```
+
+### Ajustando o Código para Melhorar a Geração:
+
+```python
+from transformers import pipeline
+
+# Carregar o pipeline de geração de texto com GPT-2
+generator = pipeline("text-generation", model="openai-community/gpt2", device=0)  # Usando CUDA
+
+# Gerar a resposta com ajustes de parâmetros
+output = generator(
+    prompt,
+    max_new_tokens=60,        # Limitar o número de tokens gerados
+    temperature=0.3,          # Reduzir a aleatoriedade para respostas mais precisas
+    top_k=50,                 # Limitar a diversidade para maior controle
+    top_p=0.85,               # Manter um controle de aleatoriedade
+    truncation=True           # Garantir que o texto não ultrapasse o limite de tokens
+)
+
+# Exibir a resposta gerada
+generated_text = output[0]['generated_text']
+
+# Remover o prompt da resposta gerada
+response = generated_text[len(prompt):].strip()
+
+print("GPT-2 Response:")
+print(response)
+```
+
+### Explicação das Alterações:
+
+1. **Prompt Refinado**: Agora pedimos explicitamente que o modelo mencione **Cristóvão Colombo**, sua **nacionalidade** e os **monarcas patrocinadores** (Fernando e Isabel), o que vai guiar o modelo para a resposta correta.
+
+2. **Temperatura e Controle de Diversidade**: O ajuste de **temperatura** (0.3) e o controle de **top\_k** e **top\_p** vão reduzir a aleatoriedade e garantir que a resposta seja mais precisa.
+
+### Esperado:
+
+A resposta esperada seria algo como:
+
+```plaintext
+GPT-2 Response:
+The Italian navigator Christopher Columbus is credited with the discovery of the Americas in 1492. He was sponsored by the Spanish monarchs Ferdinand and Isabella, and his arrival in the Caribbean marked the beginning of European exploration in the Americas.
+```
+
+### Se o Problema Persistir:
+
+Se a resposta continuar sendo imprecisa ou repetitiva, você pode considerar usar um **modelo mais avançado**, como o **GPT-3** ou **GPT-4**, que tem maior capacidade de lidar com detalhes históricos e fornecer respostas mais precisas. Ou, se estiver usando uma versão de código aberto, pode tentar **modelos mais especializados** para textos históricos.
+
+Se precisar de mais ajustes ou informações sobre como melhorar ainda mais, é só me avisar!
