@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Minha Página</title>
+        <meta name="description" content="Essa é a descrição da minha página." />
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <p>Isso é um parágrafo</p>
+    </body>
+</html>
