@@ -22,4 +22,6 @@
 
 - [Catálogo de Programação - NetAcad](https://www.netacad.com/catalogs/learn/programming)
 
+- [ Imersao Digital Cisco 2025](https://community.cisco.com/t5/netacad-blog/miss%C3%A3o-transforma%C3%A7%C3%A3o-digital-cisco-netacad-latam2025-inscri%C3%A7%C3%A3o/ba-p/5330920) 
+
 --- 
